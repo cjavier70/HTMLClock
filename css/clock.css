@@ -1,0 +1,14 @@
+h1 {
+	color:blue;
+	text-align:center;
+}
+.myClass {
+	font-family: Book Antiqua;
+	float: left;
+}
+
+#clock {
+	text-align: center;
+	font-size: 200%;
+	padding-right:  80px;
+}
