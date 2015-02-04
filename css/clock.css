@@ -2,10 +2,6 @@ h1 {
 	color:blue;
 	text-align:center;
 }
-.myClass {
-	font-family: Book Antiqua;
-	float: left;
-}
 
 #clock {
 	text-align: center;
@@ -31,4 +27,8 @@ h1 {
 }
 .hot {
 	background-color: #E74C3C;
+}
+#forecastLabel {
+	width:  50%;
+	margin:  0 auto;
 }
