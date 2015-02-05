@@ -19,6 +19,10 @@ h2 {
 	display: flex;
 	-webkit-flex-flow: nowrap;
 }
+.del {
+	margin: 0;
+}
+
 /********** The container that holds the alarm section *********/
 #alarmContainer {
 	width:500px;

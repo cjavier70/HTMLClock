@@ -1,4 +1,5 @@
-
+var divCount = 0;
+var myDict = new Array();
 
 var getTime = function() {
 	var currentdate = new Date(); 
@@ -8,6 +9,7 @@ var getTime = function() {
 	window.setTimeout(getTime, 1000);
 }
 getTime();
+
 var getTemp = function() {
 	$.getJSON("https://api.forecast.io/forecast/09e44403e53d4689679ca64e1afc336d/35.300399,-120.662362?callback=?", function(data) {
 			var items = [];
@@ -51,23 +53,65 @@ var hideAlarmPopup = function() {
 	$("#popup").addClass("hide");
 }
 
-var insertAlarm = function(hours, mins, ampm, alarmName) {
-	var myDiv = $("<div>");
+var insertAlarm = function(hours, mins, ampm, alarmName, objectId) {
+	var myDiv = $("<div id ='div"+divCount+"'>");
 	myDiv.addClass("flexable");
 	myDiv.append("<div id class='name'>"+alarmName+"</div>");
 	myDiv.append("<div id class='time'>"+hours+":"+mins+ampm+"</div>");
+	var myString = "<input onclick=deleteAlarm("+divCount;
+	var stringTwo = ") type='button' value='Delete' class='del button'/>"
+	myDiv.append(myString + stringTwo);
+	myDict[divCount] = objectId;
+	divCount += 1;
 	$("#alarms").append(myDiv);
+}
+var deleteAlarm = function(num) {
+    var AlarmObject = Parse.Object.extend("Alarm");
+	var query = new Parse.Query(AlarmObject);
+	var id = myDict[num];
+	query.get(id, {
+		success: function(deleteMe) {
+			deleteMe.destroy({});
+		}
+		,error: function(object, error) {
+			alert("Error: "+error.message);
+		}
+	});
+	$("#div"+num).remove();
 }
 
 var addAlarm = function() {
-
 	var hours = $("#hours option:selected").text(),
 		mins = $("#mins option:selected").text(),
 		ampm = $("#ampm option:selected").text(),
 		alarmName = $("#alarmName option:selected").text();
-	insertAlarm(hours, mins, ampm, alarmName);
-	hideAlarmPopup();
+    var AlarmObject = Parse.Object.extend("Alarm");
+    var alarmObject = new AlarmObject();
+      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+      success: function(object) {
+	  	insertAlarm(hours, mins, ampm, alarmName, object.id);
+		hideAlarmPopup();
+      }
+    });
 }
 
-
+var getAllAlarms = function() {
+    Parse.initialize("fdxx6IeWCNmyWed7oxSWnPqQCa4WNTWGKLQAS1sC",
+        "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
+    var AlarmObject = Parse.Object.extend("Alarm");
+    var query = new Parse.Query(AlarmObject);
+    query.find({
+        success: function(results) {
+            for (var i = 0; i < results.length; i++) {
+				var hr = results[i].get("hours"),
+					min = results[i].get("mins"),
+					ampm = results[i].get("ampm"),
+					name = results[i].get("alarmName");
+                insertAlarm(hr, min, ampm, name, results[i].id);
+            }
+        }
+    });
+}
 getTemp();
+getAllAlarms();
+
