@@ -1,6 +1,6 @@
 var divCount = 0;
 var myDict = new Array();
-var clientId = null;
+var loggedIn = false;
 
 
 
@@ -31,7 +31,6 @@ var clientId = null;
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
-	console.log(response);
 	  getAllAlarms(clientId);
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
@@ -93,8 +92,11 @@ var clientId = null;
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
+	
     FB.api('/me', function(response) {
+	  //IT WORKED HALLELULIGHA	
+	  getAllAlarms('1552158565069405') 
+	  loggedIn = true;
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
@@ -188,7 +190,13 @@ var addAlarm = function() {
 		alarmName = $("#alarmName option:selected").text();
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-      alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName}, {
+	  //IF LOGGED IN IT SET
+	  if(loggedIn) {
+		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, fbId: '1552158565069405'}, {
+	  }
+	  else {
+		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, fbId: null}, {
+	  }
       success: function(object) {
 	  	insertAlarm(hours, mins, ampm, alarmName, object.id);
 		hideAlarmPopup();
@@ -201,6 +209,7 @@ var getAllAlarms = function(userId) {
         "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject);
+	query.equalTo("alarmName", "hi")
     query.find({
         success: function(results) {
             for (var i = 0; i < results.length; i++) {
