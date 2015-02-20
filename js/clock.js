@@ -191,7 +191,7 @@ var addAlarm = function() {
     var alarmObject = new AlarmObject();
 	  //IF LOGGED IN IT SET
 	  if(loggedIn) {
-		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, fbId: '1552158565069405'}, {
+		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "fbId": '1552158565069405'}, {
 			  success: function(object) {
 				insertAlarm(hours, mins, ampm, alarmName, object.id);
 				hideAlarmPopup();
