@@ -207,7 +207,8 @@ var getAllAlarms = function(userId) {
 					ampm = results[i].get("ampm"),
 					name = results[i].get("alarmName"),
 					fbId = results[i].get("fbId");
-				if(fbId == userId)
+				//useless line
+				if(clientId == userId)
 	                insertAlarm(hr, min, ampm, name, results[i].id);
             }
         }
