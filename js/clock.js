@@ -183,6 +183,8 @@ var deleteAlarm = function(num) {
 }
 
 var addAlarm = function() {
+    Parse.initialize("fdxx6IeWCNmyWed7oxSWnPqQCa4WNTWGKLQAS1sC",
+        "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
 	var hours = $("#hours option:selected").text(),
 		mins = $("#mins option:selected").text(),
 		ampm = $("#ampm option:selected").text(),
