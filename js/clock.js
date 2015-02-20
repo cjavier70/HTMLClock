@@ -31,6 +31,8 @@ var clientId = null;
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+	console.log(response);
+	  getAllAlarms(clientId);
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -208,14 +210,13 @@ var getAllAlarms = function(userId) {
 					name = results[i].get("alarmName"),
 					fbId = results[i].get("fbId");
 				//useless line
-				if(clientId == userId)
+				if(userId != null)
 	                insertAlarm(hr, min, ampm, name, results[i].id);
             }
         }
     });
 }
 getTemp();
-getAllAlarms(clientId);
 
 //TO DO: Move js from html
 //TO DO: Move getAllAlarms in response
