@@ -228,6 +228,7 @@ var getAllAlarms = function(userId) {
 				if(userId == fbId) {
 					//DONT FUCK WITH INSERTALARM
 	                insertAlarm(hr, min, ampm, name, results[i].id);
+					console.log("alarm inserted");
 				}
 				else {
 					console.log("nope, doesnt work");
