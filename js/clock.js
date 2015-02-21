@@ -94,8 +94,8 @@ var loggedIn = false;
 	
     FB.api('/me', function(response) {
 	  //IT WORKED HALLELULIGHA	
-	  getAllAlarms('1552158565069405') 
 	  loggedIn = true;
+	  getAllAlarms('1552158565069405') 
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
