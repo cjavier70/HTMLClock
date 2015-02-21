@@ -210,6 +210,7 @@ var addAlarm = function() {
 }
 
 var getAllAlarms = function(userId) {
+	console.log("GET ALL ALARMS CALLED");
     Parse.initialize("fdxx6IeWCNmyWed7oxSWnPqQCa4WNTWGKLQAS1sC",
         "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
     var AlarmObject = Parse.Object.extend("Alarm");
@@ -227,6 +228,10 @@ var getAllAlarms = function(userId) {
 				if(userId == fbId) {
 					//DONT FUCK WITH INSERTALARM
 	                insertAlarm(hr, min, ampm, name, results[i].id);
+				}
+				else {
+					console.log("nope, doesnt work");
+
 				}
             }
         }
