@@ -30,7 +30,6 @@ var loggedIn = false;
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
-	  getAllAlarms(clientId);
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -95,7 +94,7 @@ var loggedIn = false;
     FB.api('/me', function(response) {
 	  //IT WORKED HALLELULIGHA	
 	  loggedIn = true;
-	  getAllAlarms('1552158565069405') 
+	  getAllAlarms('1552158565069405');
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
@@ -225,9 +224,10 @@ var getAllAlarms = function(userId) {
 					name = results[i].get("alarmName"),
 					fbId = results[i].get("fbId");
 				//useless line
-				if(userId == fbId)
+				if(userId == fbId) {
 					//DONT FUCK WITH INSERTALARM
 	                insertAlarm(hr, min, ampm, name, results[i].id);
+				}
             }
         }
     });
