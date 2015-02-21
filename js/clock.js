@@ -191,7 +191,7 @@ var addAlarm = function() {
 		alarmName = $("#alarmName option:selected").text();
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-	  //IF LOGGED IN IT SET
+	  //IF LOGGED IN IS SET
 	  if(loggedIn) {
 		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "fbId": '1552158565069405'}, {
 			  success: function(object) {
@@ -201,7 +201,7 @@ var addAlarm = function() {
 		});
 	  }
 	  else {
-		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, fbId: null}, {
+		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "fbId": null}, {
 			  success: function(object) {
 				insertAlarm(hours, mins, ampm, alarmName, object.id);
 				hideAlarmPopup();
@@ -215,7 +215,7 @@ var getAllAlarms = function(userId) {
         "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
     var AlarmObject = Parse.Object.extend("Alarm");
     var query = new Parse.Query(AlarmObject);
-	query.equalTo("alarmName", "hi")
+	query.equalTo("alarmName", "hi");
     query.find({
         success: function(results) {
             for (var i = 0; i < results.length; i++) {
@@ -225,7 +225,7 @@ var getAllAlarms = function(userId) {
 					name = results[i].get("alarmName"),
 					fbId = results[i].get("fbId");
 				//useless line
-				if(userId != null)
+				if(userId == fbId)
 					//DONT FUCK WITH INSERTALARM
 	                insertAlarm(hr, min, ampm, name, results[i].id);
             }
