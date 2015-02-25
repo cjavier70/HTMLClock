@@ -15,6 +15,14 @@ h2 {
 	color: yellow;
 	background-color: blue;
 }
+.experiment2 {
+	color: blue;
+	font-size: smaller;
+}
+.experiment3 {
+	color: blue;
+	font-size: x-large;
+}
 .flexable {
 	display: -webkit-box;
 	display: -moz-box;
