@@ -196,6 +196,7 @@ var addAlarm = function() {
 			  success: function(object) {
 				insertAlarm(hours, mins, ampm, alarmName, object.id);
 				hideAlarmPopup();
+				ga('send', 'event', 'Alarm', 'Add');
 			  }
 		});
 	  }
