@@ -167,6 +167,7 @@ var insertAlarm = function(hours, mins, ampm, alarmName, objectId) {
 	$("#alarms").append(myDiv);
 }
 var deleteAlarm = function(num) {
+	ga('send', 'event', 'Alarm', 'Delete');
     var AlarmObject = Parse.Object.extend("Alarm");
 	var query = new Parse.Query(AlarmObject);
 	var id = myDict[num];
@@ -184,19 +185,19 @@ var deleteAlarm = function(num) {
 var addAlarm = function() {
     Parse.initialize("fdxx6IeWCNmyWed7oxSWnPqQCa4WNTWGKLQAS1sC",
         "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
+	ga('send', 'event', 'Alarm', 'Add');
 	var hours = $("#hours option:selected").text(),
 		mins = $("#mins option:selected").text(),
 		ampm = $("#ampm option:selected").text(),
 		alarmName = $("#alarmName option:selected").text();
     var AlarmObject = Parse.Object.extend("Alarm");
     var alarmObject = new AlarmObject();
-	  //IF LOGGED IN IS SET
+	//IF LOGGED IN IS SET
 	  if(loggedIn) {
 		  alarmObject.save({"hours": hours, "mins": mins, "ampm": ampm, "alarmName": alarmName, "fbId": '1552158565069405'}, {
 			  success: function(object) {
 				insertAlarm(hours, mins, ampm, alarmName, object.id);
 				hideAlarmPopup();
-				ga('send', 'event', 'Alarm', 'Add');
 			  }
 		});
 	  }
