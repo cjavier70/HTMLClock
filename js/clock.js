@@ -95,7 +95,6 @@ var loggedIn = false;
 	  //IT WORKED HALLELULIGHA	
 	  loggedIn = true;
 	  getAllAlarms('1552158565069405');
-      console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
@@ -212,7 +211,6 @@ var addAlarm = function() {
 }
 
 var getAllAlarms = function(userId) {
-	console.log("GET ALL ALARMS CALLED");
     Parse.initialize("fdxx6IeWCNmyWed7oxSWnPqQCa4WNTWGKLQAS1sC",
         "Y8PMeKIlHI2zaDLwELvEJeJJ0d9H5OdsF8oLPHlp");
     var AlarmObject = Parse.Object.extend("Alarm");
@@ -230,10 +228,6 @@ var getAllAlarms = function(userId) {
 					//DONT FUCK WITH INSERTALARM
 	                insertAlarm(hr, min, ampm, name, results[i].id);
 					console.log("alarm inserted");
-				}
-				else {
-					console.log("nope, doesnt work");
-
 				}
             }
         }
