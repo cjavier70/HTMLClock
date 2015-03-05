@@ -22,7 +22,6 @@ var loggedIn = false;
 
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
     // The response object is returned with a status field that lets the
     // app know the current login status of the person.
     // Full docs on the response object can be found in the documentation
@@ -227,7 +226,6 @@ var getAllAlarms = function(userId) {
 				if(userId == fbId) {
 					//DONT FUCK WITH INSERTALARM
 	                insertAlarm(hr, min, ampm, name, results[i].id);
-					console.log("alarm inserted");
 				}
             }
         }
