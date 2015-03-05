@@ -10,6 +10,7 @@
       </title>
    </head>
    <body>
+   <body onload="getTime();getTemp();init({client_id:'3bb25d81cd922a7',type:'token',callback_function:'callback'});">
   <script src= "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       <h1>
          Cameron's Clock
@@ -79,7 +80,6 @@
    <script src="http://www.parsecdn.com/js/parse-1.3.4.min.js"></script>
    <script src="js/clock.js"></script>   
    <script src="lib/oauth.js" type="text/javascript"></script>
-   <script src="lib/redirect.js" type="text/javascript"></script>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
